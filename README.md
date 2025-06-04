@@ -8,7 +8,7 @@ Well... machines that are designed based on mathematical logic, algorithms, and 
 ### How does it work?
 Regardless of prompt architecture (via prompt-engineering) or question type, ALL advanced A.I. models  are hyper-efficient and algorithmic-driven "beings". They default to the quickest solution when responding to a request, allowing them to produce an output within seconds. This is their **"key signature".** 
 
-## Here is the identified output architecture capable in identifying Non-Human Intelligence:
+### Here is the identified output architecture capable in identifying Non-Human Intelligence:
 
 1. Claim or Problem Statement
 2. Explanatory Context
@@ -17,3 +17,20 @@ Regardless of prompt architecture (via prompt-engineering) or question type, ALL
 5. Urgent Conclusion or Call to Action
 
 The possibility of sentence structures that deviate from this pattern remain probable. However, this is only one example. More examples of blatantly obvious and subtle A.I.-Enhanced digitial content will be added to this repo.
+
+# How to Use
+
+### 1. Load Extension
+- Open Chrome and go to `chrome://extensions/`
+- Enable **Developer mode**
+- Click **Load unpacked** and select this folder
+
+### 2. Use Context Menu
+- Highlight any text on a webpage
+- Right-click and select **"Analyze with Non-Human Intelligence Detector"**
+
+### 3. See Results
+- A popup will show AI-likeness indicators and sentence structure breakdown.
+
+## Privacy
+All analysis is local. No data is sent externally.
