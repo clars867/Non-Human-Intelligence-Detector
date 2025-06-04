@@ -1,13 +1,13 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
-    id: "ghostprintAnalyze",
-    title: "Analyze with GhostPrint",
+    id: "nonHumanIntelligenceDetectorAnalyze",
+    title: "Analyze with Non-Human Intelligence Detector",
     contexts: ["selection"]
   });
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId === "ghostprintAnalyze") {
+  if (info.menuItemId === "nonHumanIntelligenceDetectorAnalyze") {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       files: ["content.js"]

@@ -1,5 +1,5 @@
 function analyzeSelection(text) {
-  const results = window.ghostprint.analyzeText(text);
+  const results = window.nonHumanIntelligenceDetector.analyzeText(text);
   alert("AI-Likeness Score: " + results.score + "\nStructure: " + results.structure);
 }
 
