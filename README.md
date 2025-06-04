@@ -13,6 +13,7 @@ Regardless of prompt architecture (via prompt-engineering) or question type, ALL
 ---
 
 ## Here is the identified output architecture capable in identifying Non-Human Intelligence:
+
 1. Claim or Problem Statement
 2. Explanatory Context
 3. Historical or Logical Support
