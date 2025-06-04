@@ -1,4 +1,4 @@
-window.ghostprint = {
+window.nonHumanIntelligenceDetector = {
   analyzeText: function(text) {
     const sentences = text.split(/[.!?]+/).map(s => s.trim()).filter(s => s.length > 0);
     let score = 0;
