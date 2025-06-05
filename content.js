@@ -87,3 +87,4 @@ function injectSidebar(results) {
     alert("Please select some text first.");
   }
 })();
+  
