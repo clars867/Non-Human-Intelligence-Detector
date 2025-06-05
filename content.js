@@ -1,3 +1,49 @@
+function analyzeText(text) {
+  let score = 0;
+  let structure = [];
+  let aiPhrases = [];
+  let startsWithRepeats = {};
+  const sentences = text.split(/[.!?]+/).map(s => s.trim()).filter(s => s.length > 0);
+
+  const patterns = [
+    { regex: /It is (important|clear|worth noting)/i, score: 10, tag: "AI-Transition" },
+    { regex: /This raises the question/i, score: 15, tag: "Rhetorical Question" },
+    { regex: /In (other words|this context|conclusion|summary)/i, score: 10, tag: "AI-Summarizer" },
+    { regex: /As a result|Therefore|In summary/i, score: 10, tag: "AI-Connector" }
+  ];
+
+  sentences.forEach((s) => {
+    const words = s.split(" ");
+    const start = words.slice(0, 3).join(" ").toLowerCase();
+    startsWithRepeats[start] = (startsWithRepeats[start] || 0) + 1;
+
+    structure.push(s.length > 100 ? "Complex" : "Simple");
+
+    patterns.forEach(p => {
+      if (s.match(p.regex)) {
+        score += p.score;
+        aiPhrases.push(p.tag + ": " + s);
+      }
+    });
+  });
+
+  const structuralFlow = ["claim", "context", "support", "question", "conclusion"];
+  let structureMatch = structuralFlow.every((_, i) => i < sentences.length);
+
+  const repetitiveStarts = Object.values(startsWithRepeats).filter(v => v > 2).length;
+  score += repetitiveStarts * 5;
+
+  const judgment = score >= 50 ? "Likely AI" : "Likely Human";
+
+  return {
+    score,
+    structure: structure.join(", "),
+    aiPhrases,
+    structureMatch,
+    judgment
+  };
+}
+
 function injectSidebar(results) {
   const sidebar = document.createElement("div");
   sidebar.style.position = "fixed";
@@ -32,15 +78,13 @@ function injectSidebar(results) {
   };
 }
 
-// STARTER TRIGGER TO TEST SIDEBAR OUTPUT
 (function () {
-  const testResults = {
-    score: 72,
-    structureMatch: true,
-    structure: "Complex, Simple, Complex",
-    aiPhrases: ["AI-Connector: As a result, ...", "AI-Transition: It is important to note..."],
-    judgment: "Likely AI"
-  };
-  injectSidebar(testResults);
+  const selectedText = window.getSelection().toString();
+  if (selectedText) {
+    const results = analyzeText(selectedText);
+    injectSidebar(results);
+  } else {
+    alert("Please select some text first.");
+  }
 })();
   
