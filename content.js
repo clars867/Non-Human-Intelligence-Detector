@@ -1,34 +1,46 @@
-function analyzeText(text) {
-  let score = 0;
-  let structure = [];
+function injectSidebar(results) {
+  const sidebar = document.createElement("div");
+  sidebar.style.position = "fixed";
+  sidebar.style.top = "0";
+  sidebar.style.right = "0";
+  sidebar.style.width = "350px";
+  sidebar.style.height = "100%";
+  sidebar.style.background = "#1e1e1e";
+  sidebar.style.color = "white";
+  sidebar.style.zIndex = "9999";
+  sidebar.style.padding = "20px";
+  sidebar.style.boxShadow = "0 0 10px rgba(0,0,0,0.5)";
+  sidebar.style.overflowY = "auto";
+  sidebar.style.fontFamily = "monospace";
 
-  if (text.match(/It is (important|clear|worth noting)/i)) score += 10;
-  if (text.match(/This raises the question/i)) score += 15;
-  if (text.match(/In other words|As a result|Therefore/i)) score += 10;
+  sidebar.innerHTML = `
+    <h2>🧠 Non-Human Intelligence Detector</h2>
+    <p><strong>AI-Likeness Score:</strong> ${results.score}</p>
+    <p><strong>Structural Pattern Match:</strong> ${results.structureMatch}</p>
+    <p><strong>Sentence Complexity:</strong></p>
+    <pre>${results.structure}</pre>
+    <p><strong>Flagged Phrases:</strong></p>
+    <pre>${results.aiPhrases.join("\n")}</pre>
+    <p><strong>Final Judgment:</strong> ${results.judgment}</p>
+    <button id="closeDetector" style="margin-top: 10px; padding: 6px 12px;">Close</button>
+  `;
 
-  const sentences = text
-    .split(/[.!?]+/)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 0);
-  sentences.forEach((s) => {
-    structure.push(s.length > 100 ? "Complex" : "Simple");
-  });
+  document.body.appendChild(sidebar);
 
-  return {
-    score,
-    structure: structure.join(", "),
+  document.getElementById("closeDetector").onclick = () => {
+    sidebar.remove();
   };
 }
 
+// STARTER TRIGGER TO TEST SIDEBAR OUTPUT
 (function () {
-  const selectedText = window.getSelection().toString();
-
-  if (selectedText) {
-    const results = analyzeText(selectedText);
-    alert(
-      "AI-Likeness Score: " + results.score + "\nStructure: " + results.structure
-    );
-  } else {
-    alert("Please select some text first.");
-  }
+  const testResults = {
+    score: 72,
+    structureMatch: true,
+    structure: "Complex, Simple, Complex",
+    aiPhrases: ["AI-Connector: As a result, ...", "AI-Transition: It is important to note..."],
+    judgment: "Likely AI"
+  };
+  injectSidebar(testResults);
 })();
+  
